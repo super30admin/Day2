@@ -1,8 +1,7 @@
 // Time Complexity : 0(1)
 // Space Complexity : 0(N)
 // Did this code successfully run on Leetcode : Yes
-// Any problem you faced while coding this : It is not popping the first elem, it is still poping and peeking the top element
-
+// Any problem you faced while coding this : No
 
 import java.util.Stack;
 

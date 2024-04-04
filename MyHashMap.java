@@ -1,3 +1,9 @@
+// Time Complexity : 0(1)
+// Space Complexity : 0(N)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
 class MyHashMap {
     Node[] storage; //Creating a primary bucket
     int bucket;
