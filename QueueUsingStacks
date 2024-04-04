@@ -1,0 +1,52 @@
+// Time Complexity : O(1) for all operations
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+
+// Your code here along with comments explaining your approach
+/*
+ * Using two stacks. When asked to pop the elemnt if second stack is empty shift all tto the second stack
+ */
+
+class MyQueue {
+    Stack<Integer> inSt;
+    Stack<Integer> outSt;
+    public MyQueue() {
+        inSt = new Stack<>();
+        outSt = new Stack<>();
+    }
+    
+    public void push(int x) {
+        inSt.push(x);
+    }
+    
+    public int pop() {
+        if(outSt.isEmpty()){
+            while(!inSt.isEmpty())
+                outSt.push(inSt.pop());
+        }
+        return outSt.pop();
+    }
+    
+    public int peek() {
+        if(outSt.isEmpty()){
+            while(!inSt.isEmpty())
+                outSt.push(inSt.pop());
+        }
+        return outSt.peek();
+    }
+    
+    public boolean empty() {
+        return inSt.isEmpty() && outSt.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
