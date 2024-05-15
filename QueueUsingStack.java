@@ -1,4 +1,4 @@
-// Time complexity: push (1), pop (1), if outStack is empty then O(n)
+// Time complexity: push (1), pop (1)
 // Space complexity: O(n)
 
 class MyQueue {
