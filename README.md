@@ -4,7 +4,7 @@ Explain your approach in **three sentences only** at top of your code
 
 
 ## Problem 1: (https://leetcode.com/problems/implement-queue-using-stacks/)
-##SOLUTION : https://leetcode.com/problems/implement-queue-using-stacks/solutions/5162650/queue-using-stack/
+##SOLUTION : https://leetcode.com/problems/implement-queue-using-stacks/solutions/5162724/queue-stck-using-stack/
 
 
 ## Problem 2:
