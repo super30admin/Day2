@@ -1,0 +1,83 @@
+
+
+class Node:
+    def __init__(self,key, value):
+        self.key=key
+        self.value=value
+        self.next=None
+
+class MyHashMap:
+    def __init__(self):
+        self.bucket=1000
+        self.storage=[None] * self.bucket
+    
+    def nodeFind(self, dummy, key):
+        prev=dummy
+        curr=dummy.next
+        while curr is not None and curr.key!=key:
+            prev=curr #last value is assing to prev
+            curr=curr.next #it is null
+        return prev
+
+    def getBucket(self,key):
+        return  key%self.bucket
+
+    def put(self, key: int, value: int) -> None:
+        '''
+        find modulo go to that index if index is empty create a dummy node of -1-1,
+        search if that node is present or not then
+        add it to dummy node
+        '''
+        index=self.getBucket(key)
+        if self.storage[index] is None:
+            self.storage[index]=Node(-1,-1)
+        
+        prev=self.nodeFind(self.storage[index],key)
+        if prev.next is not None:
+            prev.next.value=value  #if the kkey is match we only update the value
+        else:
+            prev.next=Node(key, value)
+
+        
+
+        
+
+    def get(self, key: int) -> int:
+        '''
+        get index, search vkey
+        return prev.next.value
+        '''
+        index = self.getBucket(key)
+        if self.storage[index] is None:
+            return -1
+        prev = self.nodeFind(self.storage[index], key)
+        if prev.next is not None:
+            return prev.next.value
+        return -1
+
+    
+
+    def remove(self, key: int) -> None:
+        '''
+        find the index  using getBucket
+        search the value usinf nodeFind
+        then make prev.next =prev.next.next 
+
+        '''
+        index=self.getBucket(key)
+        if self.storage[index] is None:
+            return 
+        prev=self.nodeFind(self.storage[index], key)
+
+        if prev.next is not None:
+            prev.next=prev.next.next
+
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
+
+#error while accessinf linked list I used cur!=key instead of cur.key !=key
