@@ -1,3 +1,8 @@
+//Time complexity - O(1)  - amortized O(1) for peek and empty as it may go to O(n)
+//Space complexity - O(n)
+//We create two stacks. Pushing the elements happens in a straighforward way. Whenever we need to peek() or pop(), we first check if the second stack
+// is empty. If empty, copy elements from first stack and put it in the second stack so that we have access to the oldest element ( first element that we added)
+// if second stack is not empty then simply peek and then pop. 
 import java.util.*;
 class MyQueue {
     
