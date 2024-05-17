@@ -1,3 +1,10 @@
+// The approach used - separate chaining using a LinkedList
+//Time complexity - O(n)
+//Space complexity - O(n)
+//working - We are using a search method to search if the key to be added is already present in our hashmap. If it already present,
+//then we know prev.next != null. In our put method, simply check if the key is already there, if yes update the value, else create a new node and insert the key-value. 
+// We create a dummynode to ease the removal of nodes operation easier. Else we have to change the reference everytime. 
+//when we try to delete the first element. 
 class DesignHashMap {
     class Node{
         int key;
