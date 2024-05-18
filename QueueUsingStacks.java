@@ -1,5 +1,6 @@
 import java.util.Stack;
-
+//Time Complexity: O(n)
+// Space Complexity: O(n)
 public class QueueUsingStacks
 {
     Stack<Integer> input;
@@ -9,15 +10,16 @@ public class QueueUsingStacks
         output = new Stack<>();
     }
 
+    //O(1)
     public void push(int x) {
         input.push(x);
     }
-
+    //O(N)
     public int pop() {
         peek();
         return output.pop();
     }
-
+    //O(N)
     public int peek() {
         if(output.isEmpty()){
             while(!input.isEmpty()){
