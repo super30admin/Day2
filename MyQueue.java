@@ -1,3 +1,8 @@
+/***
+ * TC - O(1) [insert(), remove(), peek()]
+ * SC - O(n)
+ */
+
 import java.util.Stack;
 
 class MyQueue {

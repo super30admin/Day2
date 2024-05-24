@@ -1,3 +1,8 @@
+/***
+ * TC - O(1) [put(), remove(), get()]
+ * SC - O(n)
+ */
+
 class MyHashMap {
 
     int buckets;
