@@ -1,3 +1,15 @@
+/*
+ *              Design a hashmap
+
+ https://leetcode.com/problems/design-hashmap/
+
+ * Time Complexity : O(k) where k is the number of elements.
+ * Space Complexity : O(n+m) where n is the unique key and m is the bucket size
+ * Did this code successfully run on Leetcode : Yes
+ * Any problem you faced while coding this : No
+ * Your code here along with comments explaining your approach :
+ *              - Using linear chaining.
+*/
 #include<iostream>
 #include<vector>
 #include<list>
