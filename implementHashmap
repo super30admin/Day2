@@ -1,0 +1,64 @@
+#  Time Complexity : average O(1)
+#  Space Complexity : O(m+n) m:primary array n:linked-list from primary array index
+#  Did this code successfully run on Leetcode : Yes
+# Any problem you faced while coding this :
+
+class ListNode:
+    def __init__(self,key,value,next=None):
+        self.key = key
+        self.next = next
+        self.value = value
+class MyHashMap:
+
+    def __init__(self):
+        self.storage = [None] * 1000
+
+    def hash(self,key:int)->int:
+        return key%1000
+
+    def find(self,head,key):
+        curr = head
+        prev = None 
+        while curr is not None and curr.key!=key:
+            prev = curr
+            curr = curr.next
+        return prev
+
+    def put(self, key: int, value: int) -> None:
+        index = self.hash(key)
+        if(self.storage[index] is None):
+            self.storage[index] = ListNode(-1,-1)
+        prev = self.find(self.storage[index],key)
+        if(prev.next is None):
+            prev.next = ListNode(key,value)
+        else:
+            prev.next.value = value
+        curr = ListNode
+
+    def get(self, key: int) -> int:
+        index = self.hash(key)
+        if(self.storage[index] is None):
+            return -1
+        prev = self.find(self.storage[index],key)
+        if prev.next is None:
+            return -1
+        return prev.next.value
+
+    def remove(self, key: int) -> None:
+        index = self.hash(key)
+        if(self.storage[index] is None):
+            return 
+        prev = self.find(self.storage[index],key)
+        if prev is None:
+            return 
+        curr = prev.next
+        if prev.next is not None:
+            prev.next = prev.next.next
+            curr.next = None
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
