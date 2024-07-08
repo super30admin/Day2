@@ -1,0 +1,105 @@
+Design 2
+
+
+Problem 1: Create Queue using Stacks
+
+#TC push is O(1) and Pop is O(1) Avg 
+
+class MyQueue:
+
+    def __init__(self):
+        self.inStack =[]
+        self.outStack=[]
+
+    def push(self, x: int) -> None:
+        self.inStack.append(x)
+
+    def pop(self) -> int:
+        self.peek()
+        return self.outStack.pop()
+
+    def peek(self) -> int:
+        if len(self.outStack)==0:
+            while len(self.inStack) >0:
+                self.outStack.append(self.inStack.pop())
+        return self.outStack[-1]
+
+    def empty(self) -> bool:
+        return (len(self.inStack)== 0 and len(self.outStack )==0)
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
+
+
+
+
+Problem 2: Design Hashmap 
+
+
+put, get and remove all are O(n)
+
+
+class MyHashMap:
+    class Node:
+        def __init__(self, key: int, value:int):
+            self.key = key
+            self.value = value
+            self.next = None
+
+    def __init__(self):
+        self.buckets = 10000 # to reduce the length of LL to 100 so that searching time also dec
+        self.storage = [None] * self.buckets
+
+    def getBucket(self, key:int) -> int:
+        return key % self.buckets
+
+    def find(self, key: int, node: Node) -> Node:
+        prev = node
+        curr = prev.next
+        while curr != None and curr.key != key:
+            prev = curr
+            curr = prev.next
+        return prev      
+
+    def put(self, key: int, value: int) -> None:
+        bucket = self.getBucket(key)
+        if self.storage[bucket] == None:
+            self.storage[bucket] = self.Node(-1,-1)
+        prev = self.find(key, self.storage[bucket])
+        if prev.next == None:
+            prev.next = self.Node(key, value)
+        else:
+            prev.next.value = value
+
+    def get(self, key: int) -> int:
+        bucket = self.getBucket(key)
+        if self.storage[bucket] == None:
+            return -1
+        prev = self.find(key, self.storage[bucket])
+        if prev.next == None:
+            return -1
+        else:
+            return prev.next.value
+
+    def remove(self, key: int) -> None:
+        bucket = self.getBucket(key)
+        if self.storage[bucket] == None:
+            return
+        prev = self.find(key, self.storage[bucket])
+        if prev.next == None:
+            return
+        else:
+            prev.next = prev.next.next
+
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
