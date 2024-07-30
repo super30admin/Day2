@@ -1,46 +1,95 @@
-// Time Complexity :O(1)
-// Space Complexity :O(1)
+// Time Complexity :O(N)
+// Space Complexity :
 // Did this code successfully run on Leetcode :yes
 // Any problem you faced while coding this :
 
 
 // Your code here along with comments explaining your approach
 
-class MyQueue {
-    private Stack<Integer> in;
-    private Stack<Integer> out;
-
-    public MyQueue() 
+class MyHashMap 
+{
+    class Node
     {
-        this.in = new Stack<>();
-        this.out = new Stack<>();   
-    }
-    
-    public void push(int x) 
-    {
-        in.push(x);    
-    }
-    
-    public int pop() 
-    {
-        peek();
-        return out.pop();    
-    }
-    
-    public int peek() 
-    {
-        if(out.isEmpty())
+        int key;
+        int val;
+        Node next;
+        public Node(int key, int val)
         {
-            while(!in.isEmpty())
-            {
-                out.push(in.pop());
-            }
+            this.key = key;
+            this.val = val;
         }
-        return out.peek();
+    }
+    private Node[] storage;
+    private int buckets;
+    public MyHashMap() 
+    {
+        this.buckets = 10000;
+        this.storage = new Node[this.buckets];
+
+    }
+    private int hash(int key)
+    {
+        return key%10000;
+    }
+    private Node search(Node head, int key)
+    {
+        Node prev = null;
+        Node curr = head;
+        while(curr != null && curr.key != key)
+        {
+            prev = curr;
+            curr = curr.next;
+        }
+        return prev;
     }
     
-    public boolean empty() 
+    public void put(int key, int value) 
     {
-        return in.isEmpty() && out.isEmpty();    
+        int bucket = hash(key);
+        if(storage[bucket]==null)
+        {
+            storage[bucket] = new Node(-1,-1);
+        }
+        Node prev = search(storage[bucket],key);
+        if(prev.next == null)
+        {
+            prev.next = new Node(key, value);
+        }
+        else
+        {
+            prev.next.val = value;
+        }
+    }
+    
+    public int get(int key) 
+    {
+        int bucket = hash(key);
+        if(storage[bucket]==null)
+        {
+            return -1;
+        }  
+        Node prev = search(storage[bucket],key);
+        if(prev.next == null)
+        {
+            return -1;
+        }
+        return prev.next.val;
+    }
+    
+    public void remove(int key) 
+    {
+        int bucket = hash(key);
+        if(storage[bucket]==null)
+        {
+            return;
+        }   
+        Node prev = search(storage[bucket],key);
+        if(prev.next == null)
+        {
+            return;
+        }
+        Node curr = prev.next;
+        prev.next = prev.next.next;
+        curr.next = null;
     }
 }
