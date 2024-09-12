@@ -1,0 +1,156 @@
+706. Design Hash Map
+
+class MyHashMap {
+    class Node{
+        int key,value;
+        Node next;
+        public Node(int key,int value){
+            this.key=key;
+            this.value=value;
+        }
+    }
+    Node[] node;
+    private int buc;
+    public int hashf(int key){
+        return key%buc;
+    }
+
+    public MyHashMap() {
+        buc=10000;
+        node=new Node[buc];
+    }
+    
+    public Node find(Node node, int key){
+         Node prev=node;
+         Node cur=node.next;
+        while(cur !=null && cur.key!=key){
+            prev=prev.next;
+            cur=cur.next;
+        }
+        return prev;
+    }
+    public void put(int key, int value) {
+        int hv=hashf(key);
+        if (node[hv]==null){
+        node[hv]=new Node(-1,-1);
+        }
+        Node prev=find(node[hv],key);
+        if(prev.next==null){
+            prev.next=new Node(key,value);
+        }
+        else{
+            prev.next.value=value;
+        }
+    }
+    
+    public int get(int key) {
+        int hv=hashf(key);
+        if(node[hv]==null){
+            return -1;
+        }
+        Node prev=find(node[hv],key);
+        if (prev.next==null){
+            return -1;
+        }
+        else{
+            return prev.next.value;
+        }
+        
+    }
+    
+    public void remove(int key) {
+        int hv=hashf(key);
+        if (node[hv]==null){
+            return;
+        }
+        Node prev=find(node[hv],key);
+        if(prev.next==null){
+            return;
+        }
+        
+        else{
+            prev.next=prev.next.next;
+        }
+    }
+}
+
+PYTHON
+
+class MyHashMap:
+
+    def __init__(self):
+        self.dic={}
+
+    def put(self, key: int, value: int) -> None:
+            self.dic[key]=value
+    def get(self, key: int) -> int:
+        if key in self.dic:
+            return self.dic[key]
+        else:
+            return -1
+
+    def remove(self, key: int) -> None:
+        if key in self.dic:
+            self.dic.pop(key)
+        
+
+
+232. Implement Queue using Stacks\
+
+JAVA
+
+class MyQueue {
+    Stack<Integer> in;
+    Stack<Integer> out;
+    
+    public MyQueue() {
+        in=new Stack<>();
+        out=new Stack<>();
+        
+    }
+    
+    public void push(int x) {
+        in.push(x);
+    }
+    
+    public int pop() {
+        peek();
+        return out.pop();
+    }
+    
+    public int peek() {
+        if(out.isEmpty()){
+            while(!in.isEmpty()){
+                out.push(in.pop());
+            }
+        }
+        return out.peek();
+    }
+    
+    public boolean empty() {
+        return in.isEmpty() && out.isEmpty();
+    }
+}
+
+PYTHON
+class MyQueue:
+
+    def __init__(self):
+        self.st=[]        
+
+    def push(self, x: int) -> None:
+        self.st.append(x)
+
+    def pop(self) -> int:
+        x=self.st[0]
+        self.st.pop(0)
+        return x
+
+    def peek(self) -> int:
+        return self.st[0]
+
+    def empty(self) -> bool:
+        if self.st:
+            return False
+        else:
+            return True
