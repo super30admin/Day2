@@ -1,0 +1,54 @@
+/**
+* Time complexity of add = O(n) (As we are adding at calculated key index)
+* Time complexity of remove = O(n) (As we are removing at calculated key index)
+*  Time complexity of contains = O(n) (As we are getting element at calculated key index)
+*/
+
+class MyHashSet {
+    
+    private int initialBucket;
+    private int nestedBucket;
+    private boolean[][] storage;
+
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        initialBucket=1000;
+        nestedBucket=1000;
+        storage=new boolean[initialBucket][];
+        
+    }
+    
+    public int getInitialBucketIndex(int key){
+        return key % initialBucket;       
+    }
+    
+    public int getNestedBucketIndex(int key){
+        return key / nestedBucket;
+    }
+    
+    public void add(int key) {
+        int initialBucketIndex=getInitialBucketIndex(key);
+        int nestedBucketIndex=getNestedBucketIndex(key);
+        if(storage[initialBucketIndex]==null){
+            storage[initialBucketIndex]= new boolean[nestedBucket];
+        }
+        storage[initialBucketIndex][nestedBucketIndex]=true;        
+    }
+    
+    public void remove(int key) {
+        int initialBucketIndex=getInitialBucketIndex(key);
+        int nestedBucketIndex=getNestedBucketIndex(key);
+        if(storage[initialBucketIndex]==null) return;
+        storage[initialBucketIndex][nestedBucketIndex]=false;
+        
+    }
+    
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+        int initialBucketIndex=getInitialBucketIndex(key);
+        int nestedBucketIndex=getNestedBucketIndex(key);
+        if(storage[initialBucketIndex]==null) return false;
+        return  storage[initialBucketIndex][nestedBucketIndex];
+        
+    }
+}

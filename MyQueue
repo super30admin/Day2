@@ -1,0 +1,62 @@
+/**
+* Time complexity of push : the index of push which is always 1 on top of other in sequence so O(1)
+* Time complexity of pop : the index of pop that is always last in first out so O(1)
+* Time complexity of peek : the index of peek is always at top so O(1)
+* Time complexity of empty : this checks the contant operation to check if the stacks are empty, so O(1)
+* Space complexity of problem : 2 stacks are used so 2n. As we always ignore constant so its o(n)
+*
+*/
+
+
+class MyQueue {
+    private Stack<Integer> stackIn;
+    private Stack<Integer> stackOut;
+        
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        
+        stackIn=new Stack<Integer>();
+        stackOut=new Stack<Integer>();
+        
+        
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        stackIn.push(x);
+        
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        peek();
+        return stackOut.pop();
+        
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        if(stackOut.isEmpty()){
+            while(!stackIn.isEmpty()){
+                stackOut.push(stackIn.pop());
+            }
+        }
+        return stackOut.peek();        
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return stackIn.isEmpty() && stackOut.isEmpty();
+        
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
