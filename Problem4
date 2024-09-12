@@ -1,0 +1,31 @@
+class MyHashSet {
+    
+    private var arrMap: [Int] = []
+    /** Initialize your data structure here. */
+    init() {
+        arrMap = Array(repeating: -1, count: 1000001)
+    }
+    
+    func add(_ key: Int) {
+        arrMap[key] = key
+    }
+    
+    func remove(_ key: Int) {
+        arrMap[key] = -1
+    }
+    
+    /** Returns true if this set contains the specified element */
+    func contains(_ key: Int) -> Bool {
+        return key == arrMap[key]
+    }
+}
+
+var hashSet = MyHashSet()
+hashSet.add(1);
+hashSet.add(2);
+hashSet.contains(1);    // returns true
+hashSet.contains(3);    // returns false (not found)
+hashSet.add(2);
+hashSet.contains(2);    // returns true
+hashSet.remove(2);
+hashSet.contains(2);    // returns false (already removed)

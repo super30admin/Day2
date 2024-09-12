@@ -1,0 +1,33 @@
+class MyQueue {
+    private var input = [Int]()
+    private var output = [Int]()
+    
+    func push(_ x: Int) {
+        while let i = output.popLast() {
+            input.append(i)
+        }
+        input.append(x)
+        while let i = input.popLast() {
+            output.append(i)
+        }
+    }
+    
+    func pop() -> Int {
+        return output.popLast()!
+    }
+    
+    func peek() -> Int {
+        return output.last!
+    }
+    
+    func empty() -> Bool {
+        return output.isEmpty
+    }
+}
+
+var queue = MyQueue()
+queue.push(1);
+queue.push(2);
+queue.peek();  // returns 1
+queue.pop();   // returns 1
+queue.empty(); // returns false
