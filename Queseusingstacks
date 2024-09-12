@@ -1,0 +1,33 @@
+#time complexity: 0(1) for alloperations
+#space complexity: O(n)
+
+
+class MyQueue:
+
+    def __init__(self):
+        self.inQueue = []
+        self.out = []
+
+    def push(self, x: int) -> None:
+        self.inQueue.append(x)
+
+    def pop(self) -> int:
+        self.peek()
+        return self.out.pop()
+
+    def peek(self) -> int:
+        if not self.out:
+            while(self.inQueue):
+                self.out.append(self.inQueue.pop())
+        return self.out[-1]
+
+    def empty(self) -> bool:
+        return not self.inQueue and not self.out
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
