@@ -1,0 +1,49 @@
+class MyHashSet {
+int bucket;
+int nestedBucket;
+boolean arr[][];
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        
+        bucket=1000;
+        nestedBucket=1000;
+        arr=new boolean[bucket][];
+    }
+   
+    public void add(int key) {
+      
+        int a=key%1000;
+        if(arr[a]==null){
+            arr[a]=new boolean[nestedBucket];
+        } int b=key/1000;
+            arr[a][b]=true;
+      
+    }
+    
+    public void remove(int key) {
+        int a=key%1000;
+        if(arr[a]==null){
+            return;
+        }
+        int b=key/1000;
+        arr[a][b]=false;
+    }
+    
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+        int a=key%1000;
+        if(arr[a]==null){ return false;}
+        else{
+            int b=key/1000;
+             return arr[a][b] ;
+        }
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
