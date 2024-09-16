@@ -1,0 +1,54 @@
+// Time Complexity : 
+// Space Complexity : 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+class HashSet {
+
+    /** Initialize your data structure here. */
+    private int buckets = 1000;
+	private int items = 10001;
+	private boolean[][] table;
+	
+	public HashSet()
+	{
+		table = new boolean[buckets][];
+		
+	}
+	
+	public int hash(int key)
+	{
+		return key%buckets;
+		
+	}
+	
+	public int pos(int key)
+	{
+		return key/buckets;
+	}
+	
+	public void add(int key)
+	{
+		int hashKey = hash(key);
+		 
+        if (table[hashKey] == null) {
+            table[hashKey] = new boolean[items];
+        }
+        table[hashKey][pos(key)] = true;
+    }
+    
+    public void remove(int key) {
+        int hashkey = hash(key);
+
+        if (table[hashkey] != null)
+            table[hashkey][pos(key)] = false;
+    }
+    
+  
+    public boolean contains(int key) {
+        int hashkey = hash(key);
+        return table[hashkey] != null && table[hashkey][pos(key)];
+    }
+}
