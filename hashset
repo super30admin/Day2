@@ -1,0 +1,63 @@
+//Time Complexity : O(1) for all operations
+// Space Complexity : O(n) where n is buckets size
+//double chaining approach
+class MyHashSet {
+
+    /** Initialize your data structure here. */
+    int parent = 1000;
+    int nestedBucket = 1000;
+    boolean[][] buckets= new boolean[parent][];
+    
+    public MyHashSet() {
+        //buckets= 
+    }
+    private int hashFunctionParentIndex(int key)
+    {
+        return key%parent;
+    }
+    
+     private int hashFunctionNestedBucketIndex(int key)
+    {
+        return key/nestedBucket;
+    }
+    public void add(int key) {
+        int Pindex = hashFunctionParentIndex(key);
+        int bIndex = hashFunctionNestedBucketIndex(key);
+        if(buckets[Pindex] ==null)
+        {
+             buckets[Pindex] = new boolean[nestedBucket];  //put nested bucket on parent bucket index
+        }
+        buckets[Pindex][nestedBucket] = true;  //making that value exist by setting true at that position
+    }
+    
+    public void remove(int key) {
+        int Pindex = hashFunctionParentIndex(key);
+        int bIndex = hashFunctionNestedBucketIndex(key);
+        if(buckets[Pindex] !=null)
+        {
+            buckets[Pindex][nestedBucket] = false;
+        }
+        
+    }
+    
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+        int Pindex = hashFunctionParentIndex(key);
+        int bIndex = hashFunctionNestedBucketIndex(key);
+        if(buckets[Pindex] !=null)
+        {
+            return buckets[Pindex][nestedBucket];
+        }
+        
+        return false;
+    }
+    
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
