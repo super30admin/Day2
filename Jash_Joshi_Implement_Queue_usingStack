@@ -1,0 +1,49 @@
+//TC - o(1)
+
+
+
+class MyQueue {
+    //Forward Stack (fs) for storing elements in a way they are inserted.
+    Stack<Integer> fs = new Stack<>();
+    // Reversed Stack (rs) for poping elements from front of queue.
+    Stack<Integer> rs = new Stack<>();
+    public MyQueue() {        
+    }
+    
+    public void push(int x) {
+        if(!fs.isEmpty()){
+            fs.push(x);
+        }else{
+            while(!rs.isEmpty()){
+                fs.push(rs.pop());
+            }
+            fs.push(x);
+        }
+    }
+    
+    public int pop() {
+        
+        if(!rs.isEmpty()){
+            return rs.pop();
+        }else{
+            while(!fs.isEmpty()){
+                rs.push(fs.pop());
+            }           
+        }
+        return  rs.pop();
+    }
+    
+    public int peek() {
+        
+         if(!rs.isEmpty()){
+           return rs.peek();
+        }
+        else{            
+        }
+        return fs.get(0);
+    }
+    
+    public boolean empty() {
+        return fs.isEmpty()&&rs.isEmpty();
+    }
+}
