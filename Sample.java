@@ -5,3 +5,6 @@
 
 
 // Your code here along with comments explaining your approach
+
+
+//I faced problem in coming up with an optimized solution for problem2- design hashset.
