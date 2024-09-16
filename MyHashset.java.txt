@@ -1,0 +1,70 @@
+class MyHashSet {
+
+    ListNode[] nodes = new ListNode[1000];
+     Initialize your data structure here. 
+    public MyHashSet() {
+        
+    }
+    
+    public void add(int val) {
+        int index = getIndex(val);
+        ListNode temp = findelement(index,val);
+        if(temp.next==null){
+            temp.next= new ListNode(val);
+        }
+        
+    }
+    
+    public void remove(int key) {
+        int index = getIndex(key);
+        ListNode temp = findelement(index,key);
+            if(temp.next!=null){
+                temp.next=temp.next.next;
+            }
+
+    }
+    
+    // Returns true if this set contains the specified element 
+    public boolean contains(int key) {
+        int index = getIndex(key);
+        ListNode temp = findelement(index,key);
+        if(temp.next!=null){
+            return true;
+        }
+        else
+            return false;
+    }
+    
+    private int getIndex(int key){
+        return Integer.hashCode(key)%1000;
+    }
+    
+    private ListNode findelement(int index,int val){
+        if(nodes[index]==null){
+            return nodes[index]=new ListNode(-1);
+        }
+        ListNode prev = nodes[index];
+        while(prev.next!=null && prev.next.val!=val){
+            prev=prev.next;
+        }
+        return prev;
+
+    }
+    
+    public static class ListNode{
+        int val;
+        ListNode next;
+        ListNode(int val){
+            this.val=val;
+        }
+        
+    }
+}
+
+/**
+  *Your MyHashSet object will be instantiated and called as such
+  *MyHashSet obj = new MyHashSet();
+  *obj.add(key);
+  *obj.remove(key);
+  *boolean param_3 = obj.contains(key);
+ */
