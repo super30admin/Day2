@@ -1,0 +1,67 @@
+/*
+// Time Complexity : push and pop amortized O(1), peek() - O(n) as depends on the number of elements in instack.
+// Space Complexity : O(n) - will depend on the number of elements
+// Did this code successfully run on Leetcode :
+    yes 
+// Any problem you faced while coding this :
+    yes, but solved it immediately. 
+
+// Your code here along with comments explaining your approach
+*/
+
+
+import java.util.Stack;
+
+public class MyQueue {
+
+    // Declare the stacks both instack to push the elements and outstack to pop the elements form the queue
+    
+    Stack<Integer> instack;
+    Stack<Integer> outstack;
+    
+    /** Initialize your data structure here. Initializing the Stacks here. */
+    
+    public MyQueue() {
+        instack = new Stack<>();
+        outstack = new Stack<>();
+    }
+
+    /** We push the element in instack just like pushing the elements in the back of the queue. */
+    public void push(int x) {
+            instack.push(x);
+    }
+
+    /** Removes the element from  outstack just like popping them from front of queue and returns that element. */
+    public int pop() {
+        peek();
+        return outstack.pop();
+    }
+
+    /** Get the front element. to get the first element we first check if the outstack is empty. We also check if instack is empty just to confirm 
+    if we have aboslutely no data in the stacks. if the outstack is empty  and instack still has data, we push the data from instack onto the outstack. 
+    and then return the top element on outstack*/
+    
+    public int peek() {
+        if(outstack.isEmpty()){
+            while(!instack.isEmpty()){
+                outstack.push(instack.pop());
+            }
+        }
+        return outstack.peek();
+    }
+
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return (instack.isEmpty() && outstack.isEmpty());
+    }
+}
+
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
