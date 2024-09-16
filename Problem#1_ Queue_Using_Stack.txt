@@ -1,0 +1,62 @@
+// Time Complexity : 0(1)
+// Space Complexity : 0(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+class MyQueue {
+     
+    // Initialize two stack to implement Queue data structure
+    Stack<Integer> inStack;
+    Stack<Integer> outStack;
+    int top ;
+    
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        inStack = new Stack<>();
+        outStack = new Stack<>();
+        top = -1;
+    }
+    
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        // if instack is empty keep track of front element in top varaibale and push x to inStack
+        if(inStack.isEmpty())
+            top =x;
+        inStack.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        // if outStack is empty then push all instack elements to outstack and return outstack peek element
+        if(outStack.isEmpty()){
+            while(!inStack.isEmpty()){
+                outStack.push(inStack.pop());
+            }
+        }
+        
+        return outStack.isEmpty() ? -1: outStack.pop();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        // return outstack peek element and if its empty then return instack first element which is stored in top variable
+        return outStack.isEmpty() ? top : outStack.peek();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        // if both the stack are empty then return true else false
+        return inStack.isEmpty() ? outStack.isEmpty() : false;
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */

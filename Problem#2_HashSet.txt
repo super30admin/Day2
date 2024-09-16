@@ -1,0 +1,65 @@
+// Time Complexity : 0(1)
+// Space Complexity : 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class MyHashSet {
+    
+    // create a boolean array with buckets and itemsPerBucket
+    // here we have used double hashing technique
+    private int buckets = 1000;
+    private int itemsPerBucket = 1001;
+    private boolean[][] table;
+    
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        // initialize the array but only the row no , columns size will be allocate later on to save the space
+        table = new boolean[buckets][];
+    }
+
+    // get the hashcode of key for the bucket
+    public int hash(int key) {
+        return key % buckets;
+    }
+    
+    // get hashcode to get the  item index inside the bucket
+    public int pos(int key) {
+        return key / buckets;
+    }
+    
+    public void add(int key) {
+        // get the hashcode for the bucket 
+        int hashkey = hash(key);
+        
+        // if the bucket is empty,initizalize itemperbucket in table
+        if (table[hashkey] == null) {
+            table[hashkey] = new boolean[itemsPerBucket];
+        }
+        // assign item index of bucket to true
+        table[hashkey][pos(key)] = true;
+    }
+    
+    public void remove(int key) {
+        int hashkey = hash(key); // get the hashcode for the bucket 
+
+      // if bucket is present then make the item in specific bucket to false
+        if (table[hashkey] != null)
+            table[hashkey][pos(key)] = false;
+    }
+    
+    /** Returns true if this set did not already contain the specified element */
+    public boolean contains(int key) {
+        // get hashcode of bucket
+        int hashkey = hash(key);
+        // return if bucket is not null and item value in that bucket
+        return table[hashkey] != null && table[hashkey][pos(key)];
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
