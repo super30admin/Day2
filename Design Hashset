@@ -1,0 +1,65 @@
+// Time Complexity : O(1) constant time
+// Space Complexity :O(1) // constant space
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this :
+adding a item to hash set
+
+// Your code here along with comments explaining your approach
+class MyHashSet {
+
+    int buckets;
+    int bucketItems;
+    boolean[][] storage;
+    
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        buckets = 1000;
+        bucketItems = 1001;
+        storage = new boolean[buckets][];
+    }
+    
+    private int bucketIndex(int key){
+        return key % buckets;
+    }
+    
+     private int bucketItem_Index(int key){
+        return key / bucketItems;
+    }
+    
+    public void add(int key) {
+        int bucket_key = bucketIndex(key);
+        int bucketItem_key = bucketItem_Index(key);
+        if(storage[bucket_key] == null)
+        {
+            storage[bucket_key] = new boolean[bucketItems];
+        }
+        storage[bucket_key][bucketItem_key] = true;
+    }
+    
+    public void remove(int key) {
+        int bucket_key = bucketIndex(key);
+        int bucketItem_key = bucketItem_Index(key);
+        if(storage[bucket_key] == null)
+             return;
+        storage[bucket_key][bucketItem_key] = false;
+    }
+    
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+        int bucket_key = bucketIndex(key);
+        int bucketItem_key = bucketItem_Index(key);
+         if(storage[bucket_key] == null)
+             return false;
+        else
+            return storage[bucket_key][bucketItem_key];
+       
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
