@@ -1,0 +1,81 @@
+// time and space complexity: O(1)   
+// constructor space complexity:O(n)
+class MyHashSet {
+
+    int buckets;
+    int bucketitems ;
+
+    private boolean [][] storage ;
+
+
+    // hash for findign bucket
+
+    private int bucket(int key)
+    {
+        return key % buckets;
+    }
+
+     private int bucketitem(int key)
+    {
+        return key / buckets;
+    }
+    public MyHashSet()
+    {
+        this.buckets = 1000;
+        this.bucketitems = 1000;
+        this.storage = new boolean[buckets][];
+
+    }
+
+    public void add(int key) 
+    {
+        int bucket = bucket(key);
+        int bucketitem = bucketitem(key);
+        if(storage[bucket] == null)
+        {
+            if(bucket == 0)
+            {
+                storage[bucket] = new boolean[bucketitems + 1];
+            }
+            else
+            {
+                storage[bucket] = new boolean[bucketitems];
+            }
+        }
+
+        storage[bucket][bucketitem] = true;
+    }
+
+    public void remove(int key) 
+    {
+        int bucket = bucket(key);
+        int bucketitem = bucketitem(key);
+        if(storage[bucket] == null)
+        {
+            return;
+        }
+        storage[bucket][bucketitem] = false;
+
+    }
+
+    public boolean contains(int key) 
+    {
+        int bucket = bucket(key);
+        int bucketitem = bucketitem(key);
+         if(storage[bucket] == null)
+        {
+            return false;
+        }
+        return storage[bucket][bucketitem];
+    }
+}
+
+
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
