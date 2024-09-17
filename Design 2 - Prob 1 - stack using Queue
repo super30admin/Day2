@@ -1,0 +1,72 @@
+// Time Complexity : all operations O(1)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :  while Using stack iterator
+
+
+
+
+
+class MyQueue {
+    //Two stack are required here .One is a normal stack 
+    // and Second one stack2 is for deque
+    
+    Stack stack1 = new Stack();
+    Stack stack2 = new Stack();
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        
+    }
+    
+    /** Push element x to the rear end  of queue. */
+    public void push(int x) {
+    // simple push stateemnt    
+        stack1.push(x);
+        
+    }
+    
+    /** Removes the element front end of queue and returns the element. */
+    public int pop() {
+        while(!stack1.isEmpty()){
+            stack2.push(stack1.pop());
+            
+        }
+        Object x = stack2.pop();
+        
+        while (!stack2.isEmpty()){
+            stack1.push(stack2.pop());
+        }
+        
+        return (int)x;
+    }
+    
+    // fetches the front element
+    public int peek() {
+        Iterator value = stack1.iterator();
+        return (int)value.next();
+        
+        
+    }
+    
+    //Returns true if queue is empty
+    //Returns false if queue is not empty
+    public boolean empty() {
+        
+        if (stack1.isEmpty())
+            return true;
+        else
+            return false;
+        
+        
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
