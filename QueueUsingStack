@@ -1,0 +1,49 @@
+// Time Complexity : O(1)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode :
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+class MyQueue {
+    
+    private Stack<Integer> inStack;
+    private Stack<Integer> outStack;
+
+    public MyQueue() {
+        inStack = new Stack<>();
+        outStack = new Stack<>();
+    }
+    
+    public void push(int x) {
+        inStack.push(x); //Pushing all the elements in the inStack
+    }
+    
+    public int pop() {
+        peek(); //Ensuring that there are elements in the outStack
+        return outStack.pop(); //Popping out the top element of the stack
+    }
+    
+    public int peek() {
+        //If outStack is empty, all the elements of inStack will be popped out and pushed to outStack
+        if(outStack.isEmpty()){                     
+            while(!inStack.isEmpty()){
+                outStack.push(inStack.pop());
+            }
+        }
+        return outStack.peek(); //Returns top element of outStack
+    }
+    
+    public boolean empty() {
+        return (inStack.isEmpty() && outStack.isEmpty()); //Queue is empty only if both inStack and outStack are empty
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
