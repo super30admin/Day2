@@ -1,0 +1,42 @@
+class QueueUsingStack {
+    Stack<Integer> PushS = new Stack<>();
+    Stack<Integer> PopS = new Stack<>();
+
+    public MyQueue() {
+        
+    }
+    
+    public void push(int x) {
+        PushS.push(x);
+        
+    }
+    
+    private void convertPushSToPopS(){
+        int size  = PushS.size();
+        for (int i = 0; i < size; i++){
+            Integer top = PushS.pop();
+            PopS.push(top);
+        }
+        
+    }
+    
+    public int pop() {
+        if (PopS.isEmpty()){
+            convertPushSToPopS();
+        }
+        return PopS.pop();
+        
+    }
+    
+    public int peek() {
+        if (PopS.isEmpty()){
+            convertPushSToPopS();
+        } 
+        return PopS.peek();
+    }
+    
+    public boolean empty() {
+        return PushS.isEmpty() && PopS.isEmpty();
+        
+    }
+}
