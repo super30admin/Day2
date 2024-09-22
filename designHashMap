@@ -1,0 +1,93 @@
+//TimeComplexity O(1) for all operations
+//Space complexity o(n)
+
+// Same solution as we discussed in the class.
+class MyHashMap {
+    int buckets = 10000;
+    Node[] storage;
+
+    class Node{
+        int key;
+        int value;
+        Node next;
+
+        public Node(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    public MyHashMap() {
+        storage = new Node[buckets];
+    }
+
+    private int getHash(int key) {
+        return key % buckets;
+    }
+
+    private Node getPrevious(Node head, int key){
+        Node prev = null;
+        Node curr = head;
+        while (curr != null && curr.key != key) {
+            prev = curr;
+            curr = curr.next;
+        }
+        return prev;
+    }
+    
+    public void put(int key, int value) {
+        int hash = getHash(key);
+        if(storage[hash] == null) {
+            storage[hash] = new Node(-1, -1);
+        } 
+        Node prev = getPrevious(storage[hash], key);
+            
+            if(prev.next == null) {
+                prev.next = new Node(key, value);
+            } else {
+                prev.next.value = value;
+            }
+        
+    }
+    
+    public int get(int key) {
+        int hash = getHash(key);
+        if(storage[hash] == null) {
+            return -1;
+        } else {
+            Node prev = getPrevious(storage[hash], key);
+            if(prev.next == null) {
+                return -1;
+            } else {
+                return prev.next.value;
+            }
+        }
+        
+    }
+    
+    public void remove(int key) {
+        int hash = getHash(key);
+        if(storage[hash] == null) {
+            return;
+        } else {
+            Node prev = getPrevious(storage[hash], key);
+            if(prev.next == null) {
+                return;
+            } else {
+                Node curr = prev.next;
+                prev.next = curr.next;
+                curr.next = null;
+
+
+            }
+        }
+    }
+}
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
