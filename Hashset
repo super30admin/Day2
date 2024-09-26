@@ -1,0 +1,32 @@
+class MyHashSet:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.rows = [None]*1000
+        
+
+    def add(self, key: int) -> None:
+        r = key//10**3 -1
+        if self.rows[r] is None:
+            self.rows[r] = [False]*1000
+        c = key%1000
+        self.rows[r][c] = True
+
+    def remove(self, key: int) -> None:
+        r = key//1000 - 1
+        if self.rows[r] is None:
+            return 
+        c = key%1000
+        self.rows[r][c] = False
+
+    def contains(self, key: int) -> bool:
+        """
+        Returns true if this set contains the specified element
+        """
+        r = key//1000 - 1
+        if self.rows[r] is None:
+            return False
+        c = key%1000
+        return self.rows[r][c]
