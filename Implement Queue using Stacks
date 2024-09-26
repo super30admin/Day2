@@ -1,0 +1,53 @@
+// Time Complexity : check below
+// Space Complexity :depends on data range
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+Class MyQueue {
+    Stack<Integer> instack;
+    Stack<Integer> outstack;
+
+    public MyQueue() {
+        instack = new Stack<Integer>();
+        outstack = new Stack<Integer>();
+    }
+    
+    // TC - O(1)
+    public void push(int x) {
+        instack.push(x);
+    }
+    
+    // TC - O(n) if outstack is empty else O(1) 
+    // avg time complexity - O(1)
+    public int pop() {
+        peek();
+        return outstack.pop();
+    }
+    
+    // TC - O(n) if outstack is empty else O(1) 
+    // avg time complexity - O(1)
+    public int peek() {
+        if(outstack.isEmpty())
+        {
+            while(!instack.isEmpty())
+            {
+                outstack.push(instack.pop());
+            }
+        }
+        return outstack.peek();
+    }
+    
+    // TC - O(1)
+    public boolean empty() {
+        return instack.isEmpty() && outstack.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
