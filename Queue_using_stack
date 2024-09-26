@@ -1,0 +1,52 @@
+//TimeComplexity O(1)
+//SpaceComplexity O(n)
+
+class MyQueue {
+
+Stack<Integer> in_st;
+Stack<Integer> out_st;
+    public MyQueue() {
+        this.in_st = new Stack<>();
+        this.out_st = new Stack<>();
+    }
+    
+    public void push(int x) {
+        in_st.push(x);
+    }
+    
+    public int pop() {
+        
+        if(out_st.isEmpty()){
+            while(!in_st.isEmpty()){
+                out_st.push(in_st.pop());
+            }
+        }
+        return out_st.pop();
+    }
+    
+    public int peek() {
+        if(out_st.isEmpty()){
+            while(!in_st.isEmpty()){
+                out_st.push(in_st.pop());
+            }
+        }
+        return out_st.peek();
+    }
+    
+    public boolean empty() {
+        if(in_st.isEmpty() && out_st.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
