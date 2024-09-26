@@ -1,0 +1,63 @@
+// Implement Queue using stack
+/**
+ push() => Time Complexity : O(1)
+           Space Complexity : O(1)
+ pop() =>  Time Complexity : O(n)
+           Space Complexity : O(1)
+ peek() => Time Complexity : O(n)
+           Space Complexity : O(1)
+ empty() => Time Complexity : O(1)
+           Space Complexity : O(1)
+           
+ Algorithm : 
+ 1. The 2 stacks are used in this solution for pust and pop operation. 
+ 2. Since the Stack is LIFO, we need 2, one to push elements and another to pop the elements. 
+ 3. So, push operation will store elements in stack 1 and pop will remove from stack 2. However, only during pop, we need to
+ check if stack 2 is empty or not. If it is empty then just pop all stack 1 elements and push to stack 2. So now stack 2
+ contains elements piushed in stack 1 in a reverse order. Hence this will help us to maintain FIFO order of the Queue. 
+ 4. So, if we do pop or peek from stack 2 then, queue properties of FIFO achieved.
+*/
+class MyQueue {
+    Stack<Integer> in;
+    Stack<Integer> out;
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        in = new Stack();
+        out = new Stack();
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        in.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        peek();
+        return out.pop();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        if(out.isEmpty()){
+            while(!in.isEmpty()){
+                out.push(in.pop());
+            }
+        }
+        return out.peek();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return in.isEmpty() && out.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
