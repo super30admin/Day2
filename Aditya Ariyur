@@ -1,0 +1,67 @@
+class MyHashSet {
+public:
+    bool HashSet[1000001]={false};
+    MyHashSet() {
+        std::fill(begin(HashSet), end(HashSet), false);
+    }
+    
+    void add(int key) {
+        HashSet[key]=true;
+    }
+    
+    void remove(int key) {
+        HashSet[key]=false;
+    }
+    
+    bool contains(int key) {
+        return HashSet[key];
+    }
+};
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet* obj = new MyHashSet();
+ * obj->add(key);
+ * obj->remove(key);
+ * bool param_3 = obj->contains(key);
+ */
+
+class MinStack {
+public:
+    
+    stack<pair<int,int>> Stack;
+    MinStack() {
+        
+    }
+    
+    void push(int val) {
+        int min;
+        if (Stack.empty()) {
+            min = val;
+        } else {
+            min = std::min(Stack.top().second, val);
+        }
+        Stack.push({val,min});
+    }
+    
+    void pop() {
+        Stack.pop();
+    }
+    
+    int top() {
+        return Stack.top().first;
+    }
+    
+    int getMin() {
+        return Stack.top().second;
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
