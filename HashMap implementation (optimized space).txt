@@ -1,0 +1,64 @@
+class MyHashMap:
+    class Node:
+        def __init__(self,key,val):
+            self.key = key
+            self.val = val
+            self.next = None
+            
+    def __init__(self):
+        self.buckets = 10000
+        self.Hashmap = [None] * self.buckets
+        
+    
+    def hashfunc(self,key):
+        return key%self.buckets
+    
+    def find_node(self,head,key): #To find the prev node
+        prev = None 
+        curr = head
+        while curr!= None and curr.key!=key:
+            prev = curr
+            curr = curr.next
+        return prev
+                  
+    def put(self, key: int, value: int) -> None: #check if the element is present in the hashmap
+        i = self.hashfunc(key)
+        if self.Hashmap[i] == None:
+            self.Hashmap[i] = self.Node(-1,-1)
+        
+        prev = self.find_node(self.Hashmap[i],key)
+        
+        if prev.next == None: #if prev node is the last node in the linked list
+            prev.next = self.Node(key,value) #create a new node and and point next to prev
+        else:
+            prev.next.val = value #else update the value the node with new value
+            
+       
+    def get(self, key: int) -> int:
+        i = self.hashfunc(key)
+        if self.Hashmap[i] == None:
+            return -1
+        prev = self.find_node(self.Hashmap[i],key)
+        if prev.next == None: #indicates we didn;t find the node with that key
+            return -1
+        else:
+            return prev.next.val #we found the node with the key, hence return the value
+              
+    def remove(self, key: int) -> None:
+        i = self.hashfunc(key)
+        if self.Hashmap[i] == None:
+            return
+        prev = self.find_node(self.Hashmap[i],key)
+        if prev.next == None: #we reached the end of the LL and no node to remove
+            return
+        else:
+            prev.next = prev.next.next #remove the node
+        
+        
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
