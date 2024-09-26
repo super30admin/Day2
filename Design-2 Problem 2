@@ -1,0 +1,80 @@
+class MyHashSet {
+    int [][] hashSet;
+    int hashSetSize=1000;
+    int listSize=1001;
+    
+    public MyHashSet() {
+    hashSet=new int[hashSetSize][];
+        
+    }
+    private int hashKey(int key)
+    {
+        return key%hashSetSize;
+        
+    }
+    
+    private int listIndex(int key)
+    {
+        return key/listSize;
+    }
+    public void add(int key) {
+        int hashKey=hashKey(key);
+        int listIndex=listIndex(key);
+        
+        if(hashSet[hashKey]==null)
+        {
+            hashSet[hashKey]=new int[listSize];
+        }
+        
+        hashSet[hashKey][listIndex]=key;
+    }
+    
+    public void remove(int key) {
+        int hashKey=hashKey(key);
+        int listIndex=listIndex(key);
+        
+        if(hashSet[hashKey]==null)
+        {
+            return;
+        }
+        
+        if(hashSet[hashKey][listIndex] != -1)
+        {
+            hashSet[hashKey][listIndex]=-1;
+            
+        }
+      
+        
+    }
+    
+    public boolean contains(int key) {
+       int hashKey=hashKey(key);
+        int listIndex=listIndex(key);
+        
+         if(hashSet[hashKey]==null)
+        {
+            return false;
+        }
+        
+        if(hashSet[hashKey][listIndex] != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+        
+    
+    }
+    
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
