@@ -1,5 +1,5 @@
-// Time Complexity :
-// Space Complexity :
+// Time Complexity : O(1) for push & pop
+// Space Complexity : O(n)
 // Did this code successfully run on Leetcode :
 // Any problem you faced while coding this :
 
