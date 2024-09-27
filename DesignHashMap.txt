@@ -1,0 +1,33 @@
+class MyHashMap:
+
+    def __init__(self):
+        self.size=1000
+        self.hashMap=[None]*self.size
+
+    def put(self, key: int, value: int) -> None:
+        hashval=key%self.size
+        if self.hashMap[hashval] is None:
+            self.hashMap[hashval]={}
+        self.hashMap[hashval][key]=value
+
+    def get(self, key: int) -> int:
+        hashval=key%self.size
+        if self.hashMap[hashval] is None or key not in self.hashMap[hashval]:
+            return -1
+        else:
+            return self.hashMap[hashval][key]
+
+    def remove(self, key: int) -> None:
+        hashval=key%self.size
+        if self.hashMap[hashval] is not None and key in self.hashMap[hashval]:
+            del self.hashMap[hashval][key]
+            if self.hashMap[hashval]=={}:
+                self.hashMap[hashval]=None
+            
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
