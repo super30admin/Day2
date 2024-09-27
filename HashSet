@@ -1,0 +1,81 @@
+class MyHashSet {
+    
+    //Initializing variables
+    
+    int bucket;
+    int bucketItems;
+    boolean Storage [][];
+    
+    public MyHashSet() {
+        //Declaring values
+        
+        bucket = 1000;
+        bucketItems = 1000;
+        Storage = new boolean[bucket][];
+    }
+    
+    //First Hash Function
+    
+    private int hash1(int key){
+    return key % bucket;
+    }
+    
+    //Second Hash function
+    
+    private int hash2(int key){
+    return key / bucketItems;
+    }
+    
+    
+    // For add part, check if the bucket is null futher check if t is at the 0th location,
+    // if yes then make the bucketItems as 1001 else make the bucketItems = 1000
+    // After adding make the value true
+    
+    public void add(int key) {
+        int bucket = hash1(key);
+        int bucketItem = hash2(key);
+        if(Storage[bucket]==null){
+            if(bucket==0){
+                Storage[bucket] = new boolean[bucketItems + 1];
+            }
+            else{
+            Storage[bucket] = new boolean[bucketItems];
+        }
+        }
+        
+        Storage[bucket][bucketItem] = true;
+    }
+    
+    
+    //For Remove part if the value is not there do nothing, else make it all false
+    
+    public void remove(int key) {
+        int bucket = hash1(key);
+        int bucketItems = hash2(key);
+        if(Storage[bucket]==null){
+            return;
+        }
+        Storage[bucket][bucketItems] = false;
+    }
+    
+    
+    //For contains check if the bucket is null, if so return false else return value
+    
+    public boolean contains(int key) {
+        int bucket = hash1(key);
+        int bucketItems = hash2(key);
+        if(Storage[bucket]==null){
+            return false;
+        }
+        return Storage[bucket][bucketItems];
+        
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
