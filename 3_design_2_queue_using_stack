@@ -1,0 +1,61 @@
+
+//Time Complexity : O(1) for for push // Just I am pushing blindly into push_stack // O(2n)=O(n) for pop
+//Space Complexity : n+n =2n O(n) for using two stacks
+//Did this code successfully run on Leetcode : Yes
+//Any problem you faced while coding this : No
+
+//Your code here along with comments explaining your approach
+
+
+class MyQueue {
+
+    /** Initialize your data structure here. */
+
+        
+    Stack<Integer> push_stack=new Stack<>(); // push_stack for only pushing 
+    Stack<Integer> pop_stack=new Stack<>();  // pop_stack for keeping track the front elemnt everytime 
+        
+  
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        
+        push_stack.push(x);  //push blindly into the push_stack 
+        
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if(pop_stack.isEmpty()){
+            while(!push_stack.isEmpty()){
+                pop_stack.push(push_stack.pop()); // pop elemnt from push_stack and push the same successively into pop_stack. Top element of the pop_stack, I need to remove :)
+            }
+        }
+        return pop_stack.pop(); 
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        if(pop_stack.isEmpty()){
+            while(!push_stack.isEmpty()){
+                pop_stack.push(push_stack.pop()); // pop elemnt from push_stack and push the same successively into pop_stack. Top element of the pop_stack, I need to remove :)
+            }
+        }
+        
+        return pop_stack.peek(); 
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return push_stack.isEmpty() && pop_stack.isEmpty(); //Just Java's deafult isempty check of stack
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
