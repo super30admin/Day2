@@ -1,0 +1,41 @@
+// Time Complexity :O(1)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :
+class MyHashMap {
+    List<int[]> l;
+    public MyHashMap() {
+        l=new ArrayList<int[]>();
+    }
+    
+    public void put(int key, int value) {
+        int[] arr={key,value};
+        for(int[] i:l){
+            if(i[0]==key){
+                l.set(l.indexOf(i),arr);
+                return;
+            }
+        }
+        l.add(arr);
+      
+    }
+    
+    public int get(int key) {
+        for(int[] i:l){
+            if(i[0]==key){
+                return i[1];
+            }
+        }
+        return -1;
+        
+    }
+    
+    public void remove(int key) {
+        for(int[] i:l){
+            if(i[0]==key){
+                l.remove(l.indexOf(i));
+                break;
+            }
+        }
+    }
+}

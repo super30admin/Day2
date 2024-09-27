@@ -1,0 +1,33 @@
+// Time Complexity :O(1)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :
+class MyQueue {
+        Stack<Integer> s1;
+        
+    
+    public MyQueue() {
+          s1=new Stack<>();
+     
+        
+    }
+    
+    public void push(int x) {
+        s1.push(x);
+        
+    }
+    
+    public int pop() {
+         return   s1.remove(0);
+        
+    }
+    
+    public int peek() {
+        return s1.get(0);
+        
+    }
+    
+    public boolean empty() {
+        return s1.empty();
+    }
+}
