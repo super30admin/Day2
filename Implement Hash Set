@@ -1,0 +1,48 @@
+class MyHashSet:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.hashset=[None]*100
+        self.buckets=100
+        self.bucketItems=100
+        
+    def hashing_1(self,val):
+        return val % self.buckets
+    def hashing_2(self,val):
+        return val // self.bucketItems
+          
+
+    def add(self, value: int) -> None:
+        index_1=self.hashing_1(value)
+        if self.hashset[index_1]== None:
+            self.hashset[index_1]=[None]*self.bucketItems
+        index_2=self.hashing_2(value)
+        self.hashset[index_1][index_2]=True
+        
+                 
+    def remove(self, key: int) -> None:
+        index_1 = self.hashing_1(key)    		
+        if self.hashset[index_1] == None:    			
+            return    		
+        index_2 = self.hashing_2(key)    		
+        self.hashset[index_1][index_2] = False
+        
+        
+
+    def contains(self, value: int) -> bool:
+        """
+        Returns true if this set contains the specified element
+        """
+        index_1=self.hashing_1(value)
+        index_2=self.hashing_2(value)
+        return  self.hashset[index_1] != None and self.hashset[index_1][index_2]
+        
+
+
+# Your MyHashSet object will be instantiated and called as such:
+# obj = MyHashSet()
+# obj.add(key)
+# obj.remove(key)
+# param_3 = obj.contains(key)
