@@ -1,3 +1,11 @@
+"Time Complexity is O(1) on average for put, get, and remove operations. But in  worst case (when there are many collisions and elements are stored in the same bucket), the time complexity can go to O(N), where N is the number of elements in the hash map."
+"Space Complexity is O(N)"
+
+#Explanation
+"We first inittate a primary data structure lists here with the length of root of maximum value"
+"Secondary datastructre chosen here is linkedlist here"
+"We will have to always store the prev node while traversing which will help us in all the three functions"
+
 class ListNode:
     def __init__(self, key: int, value: int):
         self.key = key
