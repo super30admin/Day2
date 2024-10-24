@@ -1,9 +1,8 @@
-// Time Complexity :
-// Space Complexity :
-// Did this code successfully run on Leetcode :
-// Any problem you faced while coding this :
+// Time Complexity : O(1) for average case and worse case time Complexity O(1)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 
-// Time complexity is O(1)
 
 public class HashMap {
     private static class Node{
@@ -47,7 +46,7 @@ public class HashMap {
         int index = hash(key); // get bucket index
         Node prev = getPrev(key, index);
 
-        // check if the key already exixts
+        // check if the key already exists
         if (prev.next == null) {
             // key is not found , insert
             prev.next = new Node(key, value);
@@ -107,4 +106,3 @@ public class HashMap {
         System.out.println("Value for key 9999: " + hashMap.get(9999)); // Should print 19998
     }
 }
-
