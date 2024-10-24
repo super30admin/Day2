@@ -1,5 +1,8 @@
 //Problem 1: (https://leetcode.com/problems/implement-queue-using-stacks/)
 
+// Here 2 stacks were taken in order to implement queue FIFO data structure working, in push operation elements are added in stack1 and in pop operation elements are 
+// removed from stack1 and added in stack 2 and last element of stack2 is popped out or peeked    
+
 import java.util.Stack;
 
 public class problem1 {
