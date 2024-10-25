@@ -25,7 +25,7 @@ class MyQueue:
 
     def peek(self) -> int:              
         if self.outStack==[]:                                   # same logic as pop        
-            while self.inStack!=[]:                             # can call peek function in pop
+            while self.inStack!=[]:                             # 
                 self.outStack.append(self.inStack.pop())
         return self.outStack[-1]    
 
