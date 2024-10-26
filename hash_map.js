@@ -85,8 +85,12 @@ MyHashMap.prototype.getPrimaryHash = function (key) {
 };
 
 //  * Your MyHashMap object will be instantiated and called as such:
-var obj = new MyHashMap();
-obj.put(1, 1);
-obj.put(2, 2);
-console.log(obj.get(1));
-obj.remove(5);
+
+test("Scenario #1:", () => {
+  var obj = new MyHashMap();
+  obj.put(1, 1);
+  obj.put(2, 2);
+
+  expect(obj.get(1)).toStrictEqual(1);
+  expect(obj.remove(5)).toStrictEqual(-1);
+});

@@ -3,7 +3,6 @@
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 
-
 // Your code here along with comments explaining your approach
 
 var MyQueue = function () {
@@ -60,3 +59,15 @@ MyQueue.prototype.empty = function () {
  * var param_3 = obj.peek()
  * var param_4 = obj.empty()
  */
+
+test("Scenario #1:", () => {
+  var obj = new MyQueue();
+  obj.push(1);
+  obj.push(2);
+  obj.push(3);
+  obj.push(4);
+
+  expect(obj.pop()).toStrictEqual(1);
+  expect(obj.peek()).toStrictEqual(2);
+  expect(obj.empty()).toStrictEqual(false);
+});
