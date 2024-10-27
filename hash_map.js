@@ -5,6 +5,8 @@
 
 // Your code here along with comments explaining your approach
 
+// Collisan
+
 class Node {
   constructor(key, value) {
     this.key = key;
@@ -70,6 +72,8 @@ MyHashMap.prototype.remove = function (key) {
   }
 };
 
+// Why do we use previous node instead of current?
+// Ans. For delete operation we need to know the previous node and we do not store previous pointer in node class.
 MyHashMap.prototype.getPreviousNode = function (node, key) {
   previousNode = null;
   currentNode = node;
