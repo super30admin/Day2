@@ -1,0 +1,77 @@
+// Time Complexity : O(1)
+// Space Complexity : 0(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+
+class MyHashSet {
+    
+    private final int BUCKETS;
+    private final int BUCKET_ITEMS;
+    private boolean[][] storage;
+
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        this.BUCKETS = 1000;
+        this.BUCKET_ITEMS = 1000;
+        this.storage = new boolean[this.BUCKETS][];
+        
+    }
+    
+    private int getBucketIdx(int key) {
+        return key % this.BUCKETS;
+    }
+    
+    private int getBucketItemIdx(int key) {
+        return key / this.BUCKETS;
+    }
+    
+    public void add(int key) {
+        int bucketIdx = this.getBucketIdx(key);
+        int bucketItemIdx = this.getBucketItemIdx(key);
+        
+        if(this.storage[bucketIdx] == null) {
+            if(bucketIdx == 0) {
+                this.storage[bucketIdx] = new boolean[this.BUCKET_ITEMS + 1];
+            } else {
+                this.storage[bucketIdx] = new boolean[this.BUCKET_ITEMS];
+            }
+        }
+        
+        this.storage[bucketIdx][bucketItemIdx] = true;
+    }
+    
+    public void remove(int key) {
+        int bucketIdx = this.getBucketIdx(key);
+        int bucketItemIdx = this.getBucketItemIdx(key);
+        
+        if(this.storage[bucketIdx] == null) {
+            return;
+        }
+        
+        this.storage[bucketIdx][bucketItemIdx] = false;
+        
+    }
+    
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+        int bucketIdx = this.getBucketIdx(key);
+        int bucketItemIdx = this.getBucketItemIdx(key);
+        
+        
+        if(this.storage[bucketIdx] == null) {
+            return false;
+        }
+        return this.storage[bucketIdx][bucketItemIdx];
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
