@@ -1,9 +1,10 @@
 import java.util.Stack;
 
-// Time Complexity: O(n) for push, O(1) for pop, peek and empty
-// Space complexity: O(n) since using 2 stacks
+// Time Complexity: O(1) for push, pop (output stack is filled only when it is empty), peek and empty
+// Space complexity: O(n) since using 2 stacks and total elements is n
 // Did this code successfully run on Leetcode : Yes
-// Any problem you faced while coding this : No, but the push operation for a queue should be O(1)
+// Any problem you faced while coding this : Yes, initial time complexity for push was not O(1).
+// Fixed by copying elements from input to output stack only when output stack is empty
 
 class MyQueue {
     Stack<Integer> inputStack;
@@ -18,53 +19,54 @@ class MyQueue {
     }
 
     /**
-     * Push item to input stack and put them in reverse order in output stack
-     * This is not the most optimized solution since everytime it has to go till the depth of the stack
+     * Push item to input stack
      *
      * @param x element to enqueue
      */
     public void push(int x) {
-        if (empty()) {
-            this.outputStack.push(x);
-            return;
-        }
-
-        while(!this.outputStack.isEmpty()) {
-            this.inputStack.push(this.outputStack.pop());
-        }
-
         this.inputStack.push(x);
-
-        while(!this.inputStack.isEmpty()) {
-            this.outputStack.push(this.inputStack.pop());
-        }
     }
 
     /**
-     * Only need to look at the top of stack and remove it
+     * Only need to look at the top of outputStack and remove it
+     * And if outputStack is empty, refill it in reverse order from inputStack
      *
      * @return top element of stack
      */
     public int pop() {
+        refillOutputStackIfEmpty();
         return this.outputStack.pop();
     }
 
     /**
-     * Only need to look at top of the stack
+     * Only need to look at top of the outputStack
+     * And if outputStack is empty, refill it in reverse order from inputStack
      *
      * @return peek into top element of stack
      */
     public int peek() {
+        refillOutputStackIfEmpty();
         return this.outputStack.peek();
     }
 
     /**
-     * If output stack is empty, then the queue is empty
+     * Helper method to refill outputStack using inputStack if that stack is empty
+     */
+    private void refillOutputStackIfEmpty() {
+        if (this.outputStack.isEmpty()) {
+            while(!this.inputStack.isEmpty()) {
+                this.outputStack.push(this.inputStack.pop());
+            }
+        }
+    }
+
+    /**
+     * If output stack and input stack both are empty, then the queue is empty
      *
      * @return true if empty, false otherwise
      */
     public boolean empty() {
-        return this.outputStack.isEmpty();
+        return this.outputStack.isEmpty() && this.inputStack.isEmpty();
     }
 }
 
