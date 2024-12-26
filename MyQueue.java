@@ -34,7 +34,7 @@ class MyQueue {
      * @return top element of stack
      */
     public int pop() {
-        refillOutputStackIfEmpty();
+        peek();
         return this.outputStack.pop();
     }
 
@@ -45,19 +45,12 @@ class MyQueue {
      * @return peek into top element of stack
      */
     public int peek() {
-        refillOutputStackIfEmpty();
-        return this.outputStack.peek();
-    }
-
-    /**
-     * Helper method to refill outputStack using inputStack if that stack is empty
-     */
-    private void refillOutputStackIfEmpty() {
         if (this.outputStack.isEmpty()) {
             while(!this.inputStack.isEmpty()) {
                 this.outputStack.push(this.inputStack.pop());
             }
         }
+        return this.outputStack.peek();
     }
 
     /**
@@ -69,12 +62,3 @@ class MyQueue {
         return this.outputStack.isEmpty() && this.inputStack.isEmpty();
     }
 }
-
-/**
- * Your MyQueue object will be instantiated and called as such:
- * MyQueue obj = new MyQueue();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.peek();
- * boolean param_4 = obj.empty();
- */
