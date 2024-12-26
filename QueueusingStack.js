@@ -6,10 +6,10 @@
 
 // Your code here along with comments explaining your approach
 
-Used two stack approach one to just insert value from front to last(st1) and other(st2) to get popped out value from first stack(st1)
+Used two stack approach one to just insert value from front to last(firststack) and other(secondstack) to get popped out value from first stack(firststack)
 var MyQueue = function() {
-    this.st1=[];
-    this.st2=[];
+    this.firststack=[];
+    this.secondstack=[];
 };
 
 /** 
@@ -18,7 +18,7 @@ var MyQueue = function() {
  */
 MyQueue.prototype.push = function(x) {
     
-    this.st1.push(x);
+    this.firststack.push(x);
     
 };
 
@@ -26,38 +26,29 @@ MyQueue.prototype.push = function(x) {
  * @return {number}
  */
 MyQueue.prototype.pop = function() {
-    if(this.st2.length){
-        return this.st2.pop();
-    }
-    else {
-        while(this.st1.length)
-            {
-                this.st2.push(this.st1.pop());
-            }
-        return this.st2.pop();
-    }
+   this.prepare();
+    return this.secondstack.pop();
 };
 
 /**
  * @return {number}
  */
 MyQueue.prototype.peek = function() {
-   if(this.st2.length) return this.st2[this.st2.length-1];
-    else{
-         while(this.st1.length)
-            {
-                this.st2.push(this.st1.pop());
-            }
-        return this.st2[this.st2.length-1];
-        
-    }
+  this.prepare();
+  return this.secondstack[this.secondstack.length-1];
 };
 /**
  * @return {boolean}
  */
 MyQueue.prototype.empty = function() {
-    return this.st1.length===0 && this.st2.length===0;
+    return this.firststack.length===0 && this.secondstack.length===0;
 };
+
+MyQueue.prototype.prepare = function(){
+    if(this.secondstack.length===0)
+    while(this.firststack.length>0)
+        this.secondstack.push(this.firststack.pop());
+}
 
 /** 
  * Your MyQueue object will be instantiated and called as such:
