@@ -77,12 +77,12 @@ public class MyHashMap {
     }
     
     
-    /*public static void main(String[] args) 
+    public static void main(String[] args) 
     { 
     	MyHashMap obj = new MyHashMap();
     	 obj.put(1,100);
     	  int param_2 = obj.get(1);
     	  obj.remove(1);
-    }*/ 
+    }
 
 }
