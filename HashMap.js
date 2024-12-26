@@ -5,11 +5,11 @@
 
 
 // Your code here along with comments explaining your approach
- I created array of size 10^6+1 and then using concept of mapping value with key checked for put(),get() whether value prexists inside them or not if yes then update value for that specific key and used delete to remove specific key.
+ I created array of size 10^6+1 and then using concept of mapping value with key checked for put(),get() whether value prexists inside them or not if yes then update value for that specific key otherwise update key value to -1 to remove specific key.
 
 
 var MyHashMap = function() {
-    this.arr = new Array(1000001);
+   this.ans = new Array(1000001).fill(-1);
 };
 
 /** 
@@ -18,7 +18,7 @@ var MyHashMap = function() {
  * @return {void}
  */
 MyHashMap.prototype.put = function(key, value) {
-    return this.arr[key]=value;
+    this.ans[key]=value;
 };
 
 /** 
@@ -26,7 +26,7 @@ MyHashMap.prototype.put = function(key, value) {
  * @return {number}
  */
 MyHashMap.prototype.get = function(key) {
-    return this.arr[key]!==undefined? this.arr[key]:-1;
+    return this.ans[key];
 };
 
 /** 
@@ -34,7 +34,7 @@ MyHashMap.prototype.get = function(key) {
  * @return {void}
  */
 MyHashMap.prototype.remove = function(key) {
-    delete this.arr[key];
+    this.ans[key]=-1;
 };
 
 /** 
