@@ -5,6 +5,9 @@
 
 
 // Your code here along with comments explaining your approach
+//Time complexity is O(1) in push , empty, pop and peek is amortized O(1) as an average over multiple operations
+//Code ran successfully on leetcode platform
+//Space complexity : None as 2 stacks are mandatory in problem to be used. 2 stacks = 2*O(n)
 class MyQueue {
     Stack<Integer> input;
     Stack<Integer> output;
@@ -37,7 +40,9 @@ class MyQueue {
     }
 }
 
-
+//Time complexity is O(n) in put, get, remove, find functions/
+//Code ran successfully on leetcode platform
+//Space complexity : Array of 10000 objects O(N) and dummy object, prev, curr would cost constant time.
 
 class MyHashMap {
 
