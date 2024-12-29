@@ -50,19 +50,19 @@ class HashMap:
         column_num = key % 1000
         if self.columns[column_num] == None:
             self.columns[column_num] = [-1]*1001
-        row_num = key / 1001
+        row_num = key // 1001
         self.columns[column_num][row_num] = value
     
     def remove(self, key):
         column_num = key % 1000
         if self.columns[column_num] == None:
             return 
-        row_num = key / 1001
+        row_num = key // 1001
         self.columns[column_num][row_num]  = -1
     
     def get(self, key):
         column_num = key % 1000
         if self.columns[column_num] == None:
             return -1
-        row_num = key / 1001
+        row_num = key // 1001
         return self.columns[column_num][row_num]
