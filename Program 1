@@ -1,0 +1,49 @@
+// Push: push in the input stack
+//Peek: pop input stack and push those element in output stack. return the output peek.
+//pop: do peek and then pop the output stack
+//empty: check if both stacks empty
+
+// space complexity: O(1)
+// time complexity: O(2n)
+
+class MyQueue {
+     Stack<Integer> inputSt;
+     Stack<Integer> outputSt;
+
+    public MyQueue() {
+         inputSt = new Stack<>();
+         outputSt = new Stack<>();   
+    }
+    
+    public void push(int x) {
+        inputSt.push(x);    
+    }
+    
+    public int pop() { 
+        peek();
+        return outputSt.pop();  
+    }
+    
+    public int peek() {
+         if (!outputSt.isEmpty()) {
+            return outputSt.peek();
+        }
+        while (!inputSt.isEmpty()) {
+            outputSt.push(inputSt.pop());
+        }
+        return outputSt.peek();    
+    }
+    
+    public boolean empty() {
+        return outputSt.isEmpty() && inputSt.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
