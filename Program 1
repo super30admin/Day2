@@ -3,8 +3,9 @@
 //pop: do peek and then pop the output stack
 //empty: check if both stacks empty
 
-// space complexity: O(1)
-// time complexity: O(2n)
+// space complexity: O(2n)
+// time complexity: push,empty - O(1)
+                    pop, peek - O(n)
 
 class MyQueue {
      Stack<Integer> inputSt;
