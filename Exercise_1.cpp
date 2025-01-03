@@ -10,8 +10,11 @@
 // When a pop happens, transfer all elements from in stack to out stack and then pop the element.
 // In some cases, when the out stack is empty and we need to do pop, then again push all the elements from in to out stack if in stack is not empty.
 
+// TC: push = O(1), pop = O(n), peek = O(n), empty = O(1)
+// SC: O(n)
+// we will be pushing the elements in one of the two stacks and will be using the other stack to pop
 class MyQueue {
-private: 
+private:
     stack<int> in;
     stack<int> out;
 public:
@@ -24,8 +27,7 @@ public:
     }
     
     int pop() {
-        peek();
-        int popped = out.top();
+        int popped = peek();
         out.pop();
         return popped;
     }
@@ -44,3 +46,12 @@ public:
         return in.empty() && out.empty();
     }
 };
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
