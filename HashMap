@@ -1,49 +1,63 @@
-class MyHashMap(object):
+class MyHashMap:
+     class Node:
+        def __init__(self, key=None, value=None, next=None):
+            self.key =key
+            self.value =value
+            self.next=None
 
-    def __init__(self):
-        self.bucket = 1000
-        self.bucketitems = 1000
-        self.storage = [None] * self.bucket
+     def __init__(self):
+        self.arr =[None]*10000
+    
+     def hash_func(self,key):
+        return key%10000
+    
+     def find(self, head, key):
+        prev = None
+        curr = head
+        while (curr != None and curr.key !=key):
+            prev = curr
+            curr = curr.next
+        return prev
 
-    def hash1(self, key: int) -> int:
-        return key % self.bucket
 
-    def hash2(self, key: int) -> int:
-        return key // self.bucketitems
-
-    def put(self, key: int, value: int) -> None:
-        """
-        Inserts a (key, value) pair into the HashMap.
-        """
-        bucket = self.hash1(key)
-        bucketitems = self.hash2(key)
         
-        if self.storage[bucket] is None:
-            if bucket == 0:
-                self.storage[bucket] = [None] * (self.bucketitems + 1)  # Handle edge case for bucket 0
-            else:
-                self.storage[bucket] = [None] * self.bucketitems
-        
-        self.storage[bucket][bucketitems] = value
 
-    def get(self, key: int) -> int:
-        """
-        Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key.
-        """
-        bucket = self.hash1(key)
-        bucketitems = self.hash2(key)
+     def put(self, key: int, value: int) -> None:
+        idx =self.hash_func(key)
+        if self.arr[idx] ==None:
+            self.arr[idx] = self.Node(-1,-1,None)
+        prev =self.find(self.arr[idx],key)
+        if prev.next ==None:
+            prev.next =self.Node(key, value, None)
+        else:
+            prev.next.value =value
         
-        if self.storage[bucket] is None or self.storage[bucket][bucketitems] is None:
+
+     def get(self, key: int) -> int:
+        idx =self.hash_func(key)
+        if self.arr[idx] ==None:
             return -1
-        return self.storage[bucket][bucketitems]
+        else:
+            prev =self.find(self.arr[idx],key)
+            if prev.next !=None:
+                return prev.next.value
+            else:
+                return -1
 
-    def remove(self, key: int) -> None:
-        """
-        Removes the mapping of the specified value key if this map contains a mapping for the key.
-        """
-        bucket = self.hash1(key)
-        bucketitems = self.hash2(key)
         
-        if self.storage[bucket] is None:
+
+     def remove(self, key: int) -> None:
+        idx =self.hash_func(key)
+        if self.arr[idx] ==None:
             return
-        self.storage[bucket][bucketitems] = None
+        prev =self.find(self.arr[idx],key)
+        if prev.next ==None:
+            return
+        prev.next = prev.next.next
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
