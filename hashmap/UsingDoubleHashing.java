@@ -1,6 +1,6 @@
 // Time Complexity : all method have complexity of O(1)
 // Space Complexity : O(N)
-// Did this code successfully run on Leetcode : No
+// Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : Yes the 1000 idex issue
 
 package hashmap;
@@ -51,6 +51,10 @@ class UsingDoubleHashing {
             } else {
                 storage[idx] = new int[1000];
             }
+
+            // Edge case
+            //Only edge case it is failing is that 0 is default value of initialized arr. Fill the initial nested array with -1; So that value give in not for a key not in the hashMap. If a key is not in hashMap. it will give -1
+            Arrays.fill(storage[idx], -1);
         }
 
         int subBucketKey = getSubBucket(key);
