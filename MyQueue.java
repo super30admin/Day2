@@ -1,6 +1,6 @@
 // Time Complexity :
 // push : O(1)
-// pop  : Amortized O(1)
+// pop/peek  : Amortized O(1)
 // Space Complexity : O(N) - two stacks holding N queue elements
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
