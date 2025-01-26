@@ -1,0 +1,80 @@
+//https://leetcode.com/problems/design-hashmap/
+// Time Complexity : 
+// put(): O(1)
+// get(): O(1)
+// remove: O(1)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+// Implemented the procedure as discussed in the class
+
+
+class MyHashMap {
+public:
+    class Node{
+    public:
+        int key;
+        int val;
+        Node *next;
+        Node(int key, int val): key(key), val(val), next(NULL) {}
+    };
+    Node *storage[1000];
+    int hash1(int key){
+        return key%1000;
+    }
+    MyHashMap() {
+        for (int i = 0; i < 1000; i++) {
+            storage[i] = NULL; // Initialize all buckets to null
+        }
+    }
+    Node *search(Node *head, int key){
+        Node *prev=head;
+        Node *curr=head;
+        while(curr!=NULL && curr->key != key){
+            prev=curr;
+            curr=curr->next;
+        }
+        return prev;
+    }
+    void put(int key, int value) {
+        int idx = hash1(key);
+        if(storage[idx] == NULL){
+            storage[idx] = new Node(-1,-1);
+        }
+        Node *prev = search(storage[idx], key);
+        if(prev->next != NULL){
+            prev->next->val = value;
+        }else{
+            prev->next = new Node(key,value);
+        }
+    }
+    
+    int get(int key) {
+        int idx = hash1(key);
+        if(storage[idx] == NULL) return -1;
+        Node *prev = search(storage[idx],key);
+        if(prev->next == NULL){
+            return -1;
+        }
+        return prev->next->val;
+    }
+    
+    void remove(int key) {
+        int idx = hash1(key);
+        if(storage[idx] == NULL) return;
+        Node *prev = search(storage[idx],key);
+        if(prev->next == NULL) return;
+        prev->next = prev->next->next;
+    }
+};
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap* obj = new MyHashMap();
+ * obj->put(key,value);
+ * int param_2 = obj->get(key);
+ * obj->remove(key);
+ */
