@@ -1,0 +1,72 @@
+//https://leetcode.com/problems/implement-queue-using-stacks/description/
+// Time Complexity : 
+// push(): O(1) 
+// pop(): O(n) 
+// peek(): O(n) 
+// empty(): O(1)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+//Declare two stacks
+//For push, just perform push operation in stack.
+//For pop and peek, transer all the eleemnts from one to other, so that the last element in stack-1 is the first element in stack-2. Return it.
+//For empty, check if stack-1 is empty or not
+
+
+class MyQueue {
+public:
+    stack<int> st1;
+    stack<int> st2;
+
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        st1.push(x);
+    }
+    
+    int pop() {
+        while(!st1.empty()){
+            st2.push(st1.top());
+            st1.pop();
+        }
+        int popped = st2.top();
+        st2.pop();
+        while(!st2.empty()){
+            st1.push(st2.top());
+            st2.pop();
+        }
+        return popped;
+
+    }
+    
+    int peek() {
+        while(!st1.empty()){
+            st2.push(st1.top());
+            st1.pop();
+        }
+        int peekEle = st2.top();
+        while(!st2.empty()){
+            st1.push(st2.top());
+            st2.pop();
+        }
+        return peekEle;
+    }
+    
+    bool empty() {
+        return st1.empty();
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
