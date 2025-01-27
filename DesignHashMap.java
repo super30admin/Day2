@@ -1,3 +1,5 @@
+//Time Complexity: Amortized O(1) for put, get and remove
+//Space Complexity: O(n)
 class MyHashMap {
     class Node{
         int key;

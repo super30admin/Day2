@@ -1,3 +1,5 @@
+//Time Complexity: O(1) for push, Amortized O(1) for pop and peek
+//Space Complexity: O(n)
 import java.util.Stack;
 class MyQueue {
     private Stack<Integer> inStack;
