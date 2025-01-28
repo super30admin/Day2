@@ -11,8 +11,8 @@ class MyQueue(object):
 
     def __init__(self):
         #intialize stacks
-        self.stack1 = []
-        self.stack2 = []
+        self.st1 = []
+        self.st2 = []
         
 
     def push(self, x):
@@ -23,17 +23,17 @@ class MyQueue(object):
 
         #Push element to the end of stack1
         
-        self.stack1.append(x)
+        self.st1.append(x)
 
     def pop(self):
         """
         :rtype: int
         """
 
-        if not self.stack2: # Check if stack2 is empty
-            while self.stack1:# Transfer elements from stack1 to stack2
-                self.stack2.append(self.stack1.pop())
-        return self.stack2.pop()# Pop and return the top of stack2 
+        if not self.st2: # Check if stack2 is empty
+            while self.st1:# Transfer elements from stack1 to stack2
+                self.st2.append(self.stack1.pop())
+        return self.st2.pop()# Pop and return the top of stack2 
         
 
     def peek(self):
@@ -41,10 +41,10 @@ class MyQueue(object):
         :rtype: int
         """
 
-        if not self.stack2:
-            while self.stack1:
-                self.stack2.append(self.stack1.pop())
-        return self.stack2[-1] #Return the top of stack2
+        if not self.st2:
+            while self.st1:
+                self.st2.append(self.stack1.pop())
+        return self.st2[-1] #Return the top of stack2
 
         
 
@@ -52,5 +52,5 @@ class MyQueue(object):
         """
         :rtype: bool
         """
-        return not self.stack1 and not self.stack2  # True if both stacks are empty
+        return not self.st1 and not self.st2  # True if both stacks are empty
         
